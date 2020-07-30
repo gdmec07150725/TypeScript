@@ -1,1 +1,1 @@
-document.title = 'Typescript';
+import './example/basic-type'
