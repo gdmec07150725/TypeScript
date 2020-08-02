@@ -40,9 +40,9 @@ const handleData = (arg1: number, ...args: number[]) => {
 
 // 重载
 
-function overLoad(x: string): string[]
-function overLoad(x: number): number[]
-function overLoad(x: any): any {
+function overLoad(x: string): string[] // 重载
+function overLoad(x: number): number[] // 重载
+function overLoad(x: any): any { // 函数实体
   if (typeof x === 'string') {
     return x.split('')
   } else {
@@ -50,5 +50,5 @@ function overLoad(x: any): any {
   }
 }
 
-console.log(overLoad('abc'))
-console.log(overLoad(123))
+console.log(overLoad('abc')) // ['a', 'b', 'c']
+console.log(overLoad(123)) // [1, 2, 3]
