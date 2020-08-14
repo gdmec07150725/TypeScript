@@ -1,4 +1,5 @@
 // import './example/basic-type'
 // import './example/interface'
 // import './example/generics'
-import './example/class'
+// import './example/class'
+import './example/enum'
