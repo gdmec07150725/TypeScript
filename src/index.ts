@@ -3,4 +3,5 @@
 // import './example/generics'
 // import './example/class'
 // import './example/enum'
-import './example/inference-compatibility'
+// import './example/inference-compatibility'
+import './example/advanced-type-1'

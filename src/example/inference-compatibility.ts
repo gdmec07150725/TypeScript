@@ -135,8 +135,8 @@ let animal: AnimalClass
 let peoples: PeopleClass
 let food: FoodIsClass
 
-animal = peoples
-animal = food // named的类型不兼容
+// animal = peoples
+// animal = food // named的类型不兼容
 
 
 // private 和 protected会使得兼容性受到影响
@@ -174,4 +174,4 @@ interface Data<T> {
 
 let data1: Data<number>
 let data2: Data<string>
-data1 = data2
+// data1 = data2
