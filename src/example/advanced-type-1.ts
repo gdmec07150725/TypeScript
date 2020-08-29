@@ -61,7 +61,7 @@ if (typeof item === 'string') {
 
 
 // 类型保护3(使用instanceof)
-// 一般用于类对象的保护  
+// 一般用于类对象的保护
  class CreateByClass1 {
    public age = 18;
    constructor() {}
@@ -184,7 +184,7 @@ function getArea(s: Shape): number {
   switch(s.kind) {
     case 'square': return s.size * s.size; break;
     case 'rectangle': return s.height * s.width; break;
-    // case 'circle': return Math.PI * s.radius ** 2; break;
+    case 'circle': return Math.PI * s.radius ** 2; break;
     default: return assertNever(s);
   }
 }
