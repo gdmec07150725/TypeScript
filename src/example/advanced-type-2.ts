@@ -68,6 +68,13 @@ type ReadOnlyType<T> = {
 // 为 Info1接口中的每一个属性添加readonly修饰符
 type ReadOnlyInfo1 = ReadOnlyType<Info1>
 
+// 移除readonly和可选(使用‘-’号)
+type RemoveReadonlyInfo2<T> = {
+  -readonly [P in keyof T]-?: T[P]
+}
+
+type Info1WithoutReadonly = RemoveReadonlyInfo2<ReadOnlyInfo1>
+
 
 /**
  * TS内置修饰符
@@ -116,3 +123,169 @@ function mapObject<K extends string | number, T, U>(Obj: Record<K, T>, f: (x: T)
 
 const namesVal = { 0: 'hello', 1: 'world', 2: 'bye' }
 const lengths = mapObject(namesVal, (s) => s.length);
+
+
+/**
+ * keyof支持数值和symbol类型的属性名
+ */
+
+ const stringIndex = 'a';
+ const numberIndex = 1;
+ const symbolIndex = Symbol();
+
+ type Objs2 = {
+   [stringIndex]: string,
+   [numberIndex]: number,
+   [symbolIndex]: symbol
+ }
+
+
+  type keysType = keyof Objs2;
+  type ReadonlyTypes<T> = {
+    readonly [p in keyof T]: T[p]
+  }
+
+
+  type MapToPromise<T> = {
+    [K in keyof T]: Promise<T[K]>
+  }
+
+  type Tuple = [number, string, boolean]
+  type promiseTuple = MapToPromise<Tuple>
+
+  let tuple1: promiseTuple = [
+    new Promise((resolve) => resolve(1)),
+    new Promise((resolve)=> resolve('Tony')),
+    new Promise((resolve) => resolve(false))
+  ]
+
+  
+  // unknown
+  // [1] 任何类型都可以赋值给unknown类型
+  let value1: unknown
+  value1 = 'Tony';
+  value1 = false;
+  value1 = Symbol();
+  value1 = 1;
+
+  // [2]  如果没有类型断言或基于控制流的类型细化时，除unknown和any类型外，unknown不可以赋值给其他类型
+  let value2: unknown
+  // let value3: string = value2;
+
+  // [3] 如果没有类型断言或基于控制流的类型细化时, 不能在他上面惊醒任何操作
+
+  let value4: unknown
+  // value4 += 1;
+
+  // [4] unknown 与任何其他类型组成的交叉类型，最后都等于其他类型
+
+  type type1 = string & unknown
+  type type2 = number & unknown
+  type type3 = unknown & unknown
+  type type4 = unknown & string[]
+
+  // [5] unknown与任何其他类型（除any时any）组成的联合类型，都等于unknown
+  type type5 = unknown | string
+  type type6 = unknown | any
+  type type7 = number[] | unknown
+
+  // [6] never类型时unknow的子类型
+  type type8 = never extends unknown ? true : false // 使用条件类型判断
+
+  // [7] keyof unknown 等于never
+  type type9 = keyof unknown
+
+  // [8] 只能对unknown进行等或者不等的操作，不能进行其他操作
+
+  value1 === value2
+  value1 !== value2
+  // value1 += 1 // 报错
+
+  // [9] unknown类型的值不能访问他的属性，作为函数调用和作为类创建实例
+  let value3: unknown;
+  // value3.name
+  // value3()
+  // new value3()
+
+  // [10] 使用映射类型时如果遍历的是unknown类型， 则不会映射任何属性
+
+  type Types1<T> = {
+    [P in keyof T]: T[P]
+  }
+
+  type types1 = Types1<any>
+  type types2 = Types1<unknown>
+
+
+
+  // 条件类型
+  type Types2<T> = T extends string ? string : number
+  let index: Types2<'123'>
+
+  // 分布式条件类型
+  type TypeName<T> = 
+    T extends string ? string :
+    T extends number ? number :
+    T extends boolean ? boolean :
+    T extends undefined ? undefined :
+    T extends () => void ? () => void :
+    object
+
+  type Type4 = TypeName<() => void>
+  type Type5 = TypeName<string>
+  type Type6 = TypeName<(() => void) | string[]>
+
+
+  // 例子
+  type Type7<T> = {
+    [K in keyof T]: T[K] extends Function ? K : never
+  }[keyof T]
+
+  interface Part {
+    id: number;
+    name: string;
+    subparts: Part[];
+    undatePart(newName:  string): void
+  }
+
+  type Test1 = Type7<Part>
+
+  // infer 类型推导
+
+  type Type8<T> = T extends any[] ? T[number] : T // T[number] 返回数组中元素的类型
+  type Test3 = Type8<string[]>
+  type Test4 = Type8<string>
+
+  // 解析： T的类型是否是数组，如果是的话，返回数组中元素的类型，否则返回T的类型
+  type Type9<T> = T extends Array<infer U> ? U : T
+
+  type Test5 = Type9<string[]>
+  type Test6 = Type9<string>
+ 
+  // Exclude(从前面的类型中选出不是后面类型的类型)
+  type Type10 = Exclude<'a' | 'b' | 'c', 'a'>
+
+
+  // Extract(从前面的类型中提取出可以赋值给后面类型的类型)
+  type Type11 = Extract<'a' | 'b' | 'c', 'c' | 'b'>
+
+  // NonNullable<T>(去掉null undefined never类型)
+  type Type12 = NonNullable<string | number | null | undefined | never>
+
+  // ReturnType<T>(获取函数返回值的类型)
+
+  type Type13  = ReturnType<() => string>
+  type Type14 = ReturnType<() => void>
+
+  // InstanceType<T> (获取构造函数类型的实例类型)
+
+  // ? 不是很懂
+  class C {
+    x = 0;
+    y = 0;
+  }
+  type T20 = InstanceType<typeof C>;  // C
+  type T21 = InstanceType<any>;  // any
+  type T22 = InstanceType<never>;  // never
+  // type T23 = InstanceType<string>;  // Error
+  // type T24 = InstanceType<Function>;  // Error
