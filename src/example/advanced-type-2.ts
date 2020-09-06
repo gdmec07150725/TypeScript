@@ -223,7 +223,7 @@ const lengths = mapObject(namesVal, (s) => s.length);
   let index: Types2<'123'>
 
   // 分布式条件类型
-  type TypeName<T> = 
+  type TypeName<T> =
     T extends string ? string :
     T extends number ? number :
     T extends boolean ? boolean :

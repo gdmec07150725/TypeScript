@@ -5,4 +5,5 @@
 // import './example/enum'
 // import './example/inference-compatibility'
 // import './example/advanced-type-1'
-import './example/advanced-type-2'
+// import './example/advanced-type-2'
+import './example/merging'
