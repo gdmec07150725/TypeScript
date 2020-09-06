@@ -172,7 +172,7 @@ const lengths = mapObject(namesVal, (s) => s.length);
   let value2: unknown
   // let value3: string = value2;
 
-  // [3] 如果没有类型断言或基于控制流的类型细化时, 不能在他上面惊醒任何操作
+  // [3] 如果没有类型断言或基于控制流的类型细化时, 不能在他上面进行任何操作
 
   let value4: unknown
   // value4 += 1;
@@ -189,7 +189,7 @@ const lengths = mapObject(namesVal, (s) => s.length);
   type type6 = unknown | any
   type type7 = number[] | unknown
 
-  // [6] never类型时unknow的子类型
+  // [6] never类型是unknow的子类型
   type type8 = never extends unknown ? true : false // 使用条件类型判断
 
   // [7] keyof unknown 等于never
