@@ -1,3 +1,4 @@
+// 接口声明的是一个对象的属性情况
 // 基本用法
 interface NameInfo {
   firstName: string,
@@ -26,7 +27,7 @@ const getVegetable = ({ color, type }: Vegetable) => {
 
 console.log(
   getVegetable({
-    type: 'tomato'
+    type: 'tomato',
   })
 )
 
@@ -99,7 +100,7 @@ interface Banana extends Fruit{
 
 const banana: Banana = {
   type: 'rectangle',
-  color: 'yellow'
+  color: 'yellow',
 }
 
 // 混合类型接口

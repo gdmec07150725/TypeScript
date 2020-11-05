@@ -34,9 +34,14 @@ let optionalParameters = (x: number, y = 1) => x + y // 等同于上面
 // console.log(optionalParameters(1 , '1')) // 会报错，因为ts自动类型推断认为y的值要是number类型
 
 // 剩余参数
-const handleData = (arg1: number, ...args: number[]) => {
+let handleData = (arg1: number, ...args: number[]) => {
 
 }
+
+// 参数报错 ‘string’ not assign to 'number'
+// handleData = (num = 1, num2 = '1') => {
+//  return num  + num2;
+// }
 
 // 重载
 

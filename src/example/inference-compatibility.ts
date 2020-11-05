@@ -62,6 +62,7 @@ const res2 = sumFun([1, 2, 3], (arg1: number, arg2: number, arg3: number): numbe
 
 /**
  * 4.函数参数双向协变(不是很明白,要看一下文档才行)
+ * 解析：参数类型更窄的函数可以接受参数类型更广的函数，反过来却不行（窄接受宽）
  */
 
 //  let funA = (arg: number | string): void => {}
@@ -72,9 +73,10 @@ const res2 = sumFun([1, 2, 3], (arg1: number, arg2: number, arg3: number): numbe
 
 /**
  * 5.返回值类型
+ * 解析： 返回值可以接受比其定义的类型更狭窄的类型（宽接受窄）
  */
 
-let x = (): string | number => 0
+let x = (): string | number => 1
 let y = (): string => 'a'
 let z = (): boolean => false
  x = y

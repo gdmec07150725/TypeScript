@@ -39,6 +39,7 @@ const item = getRandomValue();
 // }
 
 // 类型保护1(定义一个函数，比较麻烦)
+// value is string 是一个类型谓词
 function isString(value: number | string): value is string {
   return typeof value === 'string'
 }
@@ -130,25 +131,29 @@ let ccc: Childs<string> = {
 // 使用接口（interface）和类型别名创建的同一种类型是互相兼容的
 
 type Alias = {
-  num: number
+  num: number,
+  xiha: string,
 }
 
-interface Interface {
-  num: number
+interface Interfac<T> {
+  num: number,
+  xiha: T
 }
 
 let _alias: Alias = {
   num: 123,
+  xiha: 'Tony'
 }
 
-let _interface: Interface = {
-  num: 321
+let _interface: Interfac<string> = {
+  num: 321,
+  xiha: 'Tony'
 }
 
 _alias = _interface // 类型兼容
 
 
-// 字面量类型
+// 字面量类型(相当于常量)
 // 数值字面量和字符串字面量类型
 
 type Names ='Tony'

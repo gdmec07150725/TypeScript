@@ -45,9 +45,16 @@ namespace Validations {
 }
 
 namespace Validations {
-  console.log(numberReg);
   export const checkLetter = () => {}
 }
+
+// 结果
+// namespace Validations {
+//   export const numberReg = 1
+//   export const checkNumber = () => {}
+//   export const checkLetter = () => {}
+// }
+
 
 // 命名空间和类的声明合并（类的定义要在命名空间之前）
 class Merge {
@@ -59,7 +66,7 @@ namespace Merge {
   export const numberRge = 1; // 合并之后将作为类的静态属性
 }
 
-console.dir(Merge)
+console.log(Merge.numberRge)
 
 // 命名空间和函数的声明合并（函数的定义要在命名空间之前）
 
@@ -71,6 +78,8 @@ namespace CountUp {
   export let count = 0
 }
 
+console.log(CountUp.count)
+CountUp()
 
 // 命名空间和枚举的声明合并（没有先后顺序）
 enum Colors {

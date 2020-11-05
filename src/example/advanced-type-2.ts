@@ -7,7 +7,7 @@ interface InfoInterfaceAdvanced {
   age: number;
 }
 
-let infoProp: keyof InfoInterfaceAdvanced;
+let infoProp: keyof InfoInterfaceAdvanced; // '"name" | "age"'
 infoProp = 'name';
 infoProp = 'age';
 
@@ -184,7 +184,7 @@ const lengths = mapObject(namesVal, (s) => s.length);
   type type3 = unknown & unknown
   type type4 = unknown & string[]
 
-  // [5] unknown与任何其他类型（除any时any）组成的联合类型，都等于unknown
+  // [5] unknown与任何其他类型（除any是any）组成的联合类型，都等于unknown
   type type5 = unknown | string
   type type6 = unknown | any
   type type7 = number[] | unknown
@@ -238,14 +238,14 @@ const lengths = mapObject(namesVal, (s) => s.length);
 
   // 例子
   type Type7<T> = {
-    [K in keyof T]: T[K] extends Function ? K : never
+    [K in keyof T]: T[K] extends () => void ? K : never
   }[keyof T]
 
   interface Part {
-    id: number;
-    name: string;
-    subparts: Part[];
-    undatePart(newName:  string): void
+    id: number; // never
+    name: string; // never
+    subparts: Part[];  // never
+    undatePart(newName:  string): void // undatePart
   }
 
   type Test1 = Type7<Part>

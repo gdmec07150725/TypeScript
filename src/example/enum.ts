@@ -5,7 +5,7 @@
  */
 
 
-// 数字枚举
+// 数字枚举, 默认从0开始
 enum Status {
   Uploading,
   Success,
@@ -62,12 +62,12 @@ interface ButtonInterface {
 }
 
 const button: ButtonInterface = {
-  status: Button.OFF // 或者Button.ON
+  status: Button.OFF, // 或者Button.ON
 }
 
 /**
  * const enum
- * 编译之后枚举不会实际纯在
+ * 编译之后枚举不会实际存在
  */
 
  const enum Name {

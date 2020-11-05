@@ -109,7 +109,7 @@ class A {
 }
 
 const a1 = new A('Tony');
-// a1.name
+// console.log(a1.name)
 
 /**
  * 可选类属性
@@ -130,7 +130,7 @@ const a1 = new A('Tony');
  /**
   * 抽象类
   * 无法创建实例， 只能被继承
-  * 继承该抽象类的子类需要实现该类的抽象方法
+  * 继承该抽象类的子类需要实现该类的抽象属性和抽象方法
   */
 
   abstract class People {
@@ -176,17 +176,22 @@ const a1 = new A('Tony');
  interface FoodInterface {
    type: string;
    name: string;
+   xiha: number;
  }
 
  class FoodClass implements FoodInterface {
   //  public static type: string // 报错
   public type: string
   public name: string
-  constructor(type: string, name: string) {
+  public xiha: number
+  constructor(type: string, name: string, xiha: number) {
      this.type = type;
      this.name = name;
+     this.xiha = xiha;
    }
  }
+
+ const newFoodClass = new FoodClass('man', 'Tony', 1);
 
  const create = <T>(c: new() => T): T => {
    return new c();
