@@ -7,4 +7,4 @@
 // import './example/advanced-type-1'
 // import './example/advanced-type-2'
 // import './example/merging'
-import './example/decorators'
+import './example/mixins'
