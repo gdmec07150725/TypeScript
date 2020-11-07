@@ -1,0 +1,21 @@
+{
+  "name": "map-array",
+  "version": "1.0.0",
+  "description": "typscript of array map",
+  "main": "./dist/map-array-tony.js",
+  "scripts": {
+    "test": "typescript array map "
+  },
+  "keywords": [
+    "typescript",
+    "tony"
+  ],
+  "author": "715296475@qq.com",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.0.5"
+  },
+  "dependencies": {
+    "map-array-tony": "^1.0.0"
+  }
+}
